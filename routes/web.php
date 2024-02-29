@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\RegisterControlller;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,12 +16,62 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/users', function () {
-    global $users;
-    $userNames=[];
-    foreach($users as $key  ){
-        $userNames[]=$key['name'];
-    }
-    $name=implode(', ', $userNames);
-    return "The users are: " .$name.",";
+// Route::get('/users', function () {
+//     global $users;
+//     $userNames=[];
+//     foreach($users as $key  ){
+//         $userNames[]=$key['name'];
+//     }
+//     $name=implode(', ', $userNames);
+//     return "The users are: " .$name.",";
+// });
+
+// Route::get('/categories/skincare',function(Request $request){
+//     return "Path: ".$request->path();
+// });
+
+    // Route::get('/categories/skincare',function(Request $request){
+    //     return "Path: ".$request->url();
+    // });
+    // Route::get('/',function(Request $request){
+    //     return "Path:" .$request->fullUrl();
+    // });
+    // Route::get('/',function(Request $request){
+    //     return "Path:" .$request->fullUrlWithQuery(['name'=>'VuThanhTai']);
+    // });
+
+    // Route::get('/admin/post',function(Request $request){
+    //     if($request ->is('admin')){
+    //         return 'Request path mathches with "admin/* pattern';
+    //     }
+    // });
+
+        // Route::get('/admin/post',function(Request $request){
+        //     if($request ->is('admin/*')){
+        //         return 'Request path mathches with "admin/* pattern';
+        //     }
+        // });
+
+//         Route::get('/admin/post',function(Request $request){
+//            echo 'Current method HTTP:' . $request->method().'</br>';
+//            if($request->isMethod('GET')){
+//             return "this is get method http";
+//            }
+//         });
+// Route::get('userIp/',function(Request $request){
+//     $ipAddress=$request->ip();
+//     echo '<h1>Địa chỉ IP người dùng:' . $ipAddress.'</h1>';
+// });
+
+
+Route::get('/index',function(){
+    return view('form');
 });
+
+Route::post('/post',[FormController::class,'post']);
+
+Route::get('/register',function(){
+    return view('formRegister');
+});
+
+Route::post('/postRegister',[RegisterControlller::class,'postRegister']);
